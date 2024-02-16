@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="459px" preserveAspectRatio="none" style="width:476px;height:459px;background:#FFFFFF;" version="1.1" viewBox="0 0 476 459" width="476px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="275.1641" style="stroke:#181818;stroke-width:1.0;" width="10" x="57" y="92.6094"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="114.9609"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="175.6641"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="236.3672"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="322.4219"/><rect height="79.0547" style="stroke:#000000;stroke-width:1.5;fill:none;" width="460" x="10" y="281.7188"/><line style="stroke:#181818;stroke-width:0.5;fill:none;stroke-dasharray:5.0,5.0;" x1="62" x2="62" y1="82.6094" y2="377.7734"/><line style="stroke:#181818;stroke-width:0.5;fill:none;stroke-dasharray:5.0,5.0;" x1="428" x2="428" y1="82.6094" y2="377.7734"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="20" y="79.5332">Receptionist</text><ellipse cx="62" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M62,21.5 L62,48.5 M49,29.5 L75,29.5 M62,48.5 L49,63.5 M62,48.5 L75,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="20" y="391.3066">Receptionist</text><ellipse cx="62" cy="402.8828" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M62,410.8828 L62,437.8828 M49,418.8828 L75,418.8828 M62,437.8828 L49,452.8828 M62,437.8828 L75,452.8828 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="396" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="403" y="71.5332">:System</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="396" y="376.7734"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="403" y="398.3066">:System</text><rect fill="#FFFFFF" height="275.1641" style="stroke:#181818;stroke-width:1.0;" width="10" x="57" y="92.6094"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="114.9609"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="175.6641"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="236.3672"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="423" y="322.4219"/><polygon fill="#181818" points="411,110.9609,421,114.9609,411,118.9609,415,114.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="67" x2="417" y1="114.9609" y2="114.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="74" y="110.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="247" x="85" y="110.1045">asks an SNS User if it has an appointment</text><polygon fill="#181818" points="78,141.3125,68,145.3125,78,149.3125,74,145.3125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="72" x2="427" y1="145.3125" y2="145.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="84" y="140.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="198" x="95" y="140.4561">requests data (SNS User Number)</text><polygon fill="#181818" points="411,171.6641,421,175.6641,411,179.6641,415,175.6641" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="67" x2="417" y1="175.6641" y2="175.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="74" y="170.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122" x="85" y="170.8076">types requested data</text><polygon fill="#181818" points="78,202.0156,68,206.0156,78,210.0156,74,206.0156" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="72" x2="427" y1="206.0156" y2="206.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="84" y="201.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="95" y="201.1592">shows data</text><polygon fill="#181818" points="411,232.3672,421,236.3672,411,240.3672,415,236.3672" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="67" x2="417" y1="236.3672" y2="236.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="74" y="231.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="326" x="85" y="231.5107">searches an appointment through the SNS User Number</text><polygon fill="#181818" points="78,262.7188,68,266.7188,78,270.7188,74,266.7188" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="72" x2="427" y1="266.7188" y2="266.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="84" y="261.8623">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="32" x="95" y="261.8623">result</text><path d="M10,281.7188 L75,281.7188 L75,290.0703 L65,300.0703 L10,300.0703 L10,281.7188 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="79.0547" style="stroke:#000000;stroke-width:1.5;" width="460" x="10" y="281.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="20" x="25" y="296.2139">opt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="127" x="90" y="295.1377">[if has an appointment]</text><polygon fill="#181818" points="411,318.4219,421,322.4219,411,326.4219,415,322.4219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="67" x2="417" y1="322.4219" y2="322.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="74" y="317.5654">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="85" y="317.5654">Registers arrival</text><polygon fill="#181818" points="78,348.7734,68,352.7734,78,356.7734,74,352.7734" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="72" x2="427" y1="352.7734" y2="352.7734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="84" y="347.917">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="152" x="95" y="347.917">informs operation success</text><!--MD5=[287347d52b65f86bf8c1f8222c36dc8a]
+@startuml
+
+autonumber
+actor "Receptionist" as R
+
+activate R
+
+R -> ":System" : asks an SNS User if it has an appointment
+activate ":System"
+
+":System" - -> R : requests data (SNS User Number)
+deactivate ":System"
+
+R -> ":System" : types requested data
+activate ":System"
+
+":System" - -> R : shows data
+deactivate ":System"
+
+R -> ":System" : searches an appointment through the SNS User Number
+activate ":System"
+
+":System" - -> R : result
+deactivate ":System"
+
+opt if has an appointment
+R -> ":System" : Registers arrival
+activate ":System"
+
+":System" - -> R : informs operation success
+deactivate ":System"
+end
+
+deactivate R
+
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 11:55:52 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

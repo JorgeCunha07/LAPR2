@@ -1,0 +1,67 @@
+@startuml
+hide methods
+
+skinparam classAttributeIconSize 0
+
+class Company{
+ -designation
+}
+
+class Employee{
+-id
+-address
+-phoneNumber
+-citizenCardNumber
+}
+
+class VaccinationCenter {
+  -name
+  -phoneNumber
+  -email
+  -faxNumber
+  -websiteAddress
+  -openHour
+  -closeHour
+  -slotDuration
+  -fullCapacity
+  -maxVaccinePerSlot
+}
+
+class Administrator{
+
+}
+
+class Vaccine {
+-nameBrand
+ -groupAge
+ -numberOfVaccines
+ -dosage
+ -timeBetweenDoses
+
+}
+
+class TypeOfVaccine{
+-String code
+-String designation
+}
+
+class GroupAge{
+
+}
+class Dosage{
+
+}
+
+Administrator "1" -- "*" Employee : manages >
+Company "1" -- "*" Employee : employ >
+Administrator "1" -- "*" VaccinationCenter : manages >
+Administrator "1" -- "*" Vaccine : manages >
+Administrator "1" -- "*" TypeOfVaccine : manages >
+TypeOfVaccine "1" -- "*" Vaccine : categorizes >
+Vaccine "1" -- "*" GroupAge : checks >
+Vaccine "1" -- "*" Dosage : checks >
+
+
+
+
+@enduml

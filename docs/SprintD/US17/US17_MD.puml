@@ -1,0 +1,56 @@
+@startuml
+hide methods
+skinparam classAttributeIconSize 0
+
+
+class SNSUser {
+  -name
+  -SNSNumber
+  -email
+  -phoneNumber
+  -birthDate
+}
+
+class VaccineSchedule{
+ -dateTime
+}
+
+class TypeOfVaccine{
+ -code
+ -designation
+}
+
+class Vaccine{
+ -nameBrand
+ -numberOfVaccines
+ -timeBetweenDoses
+}
+
+class VaccinationCenter {
+  -name
+  -phoneNumber
+  -email
+  -faxNumber
+  -websiteAddress
+  -openHour
+  -closeHour
+  -slotDuration
+  -fullCapacity
+  -maxVaccinePerSlot
+}
+
+class HealthCareCenter{
+}
+
+Vaccine "1" -- "*" GroupAge : checks >
+Vaccine "1" -- "*" Dosage : checks
+SNSUser "1" -- "*" VaccineSchedule : created <
+VaccineSchedule "*" -- "1" TypeOfVaccine : takes >
+TypeOfVaccine "1" -- "*" Vaccine : categorizes >
+HealthCareCenter "*" -- "*" TypeOfVaccine : administers >
+HealthCareCenter  --|>  VaccinationCenter : is a
+
+
+
+
+@enduml

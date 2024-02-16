@@ -1,0 +1,11 @@
+@startuml
+
+
+package app <<Folder>>#DDDDDD {
+package ui <<Folder>>#DDDDDD {
+package console <<Folder>>#DDDDDD {
+class VaccinationStatisticsUI {
+
+    }
+
+@enduml

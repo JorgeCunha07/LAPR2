@@ -1,0 +1,133 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package app <<Folder>>#DDDDDD {
+package ui <<Folder>>#DDDDDD {
+package console <<Folder>>#DDDDDD {
+class AnalyzeCenterPerformanceUI {
+
+    }
+}
+}
+package controller <<Folder>>#DDDDDD {
+class AnalyzeCenterPerformanceController {
+
++getVaccinationCenterForTheUser()
++validateVaccinationCenter()
++checkDate(date)
++checkTimeInterval(timeInterval)
++analyzeVaccinationCenterPerformance(day, timeInterval)
++Analysis(String vaccinationCenter,differences,maximumSum,hoursPeriod,sum)
+
+}
+}
+
+package domain <<Folder>>#DDDDDD {
+package model <<Folder>>#DDDDDD {
+
+
+class PerformanceCenter {
++recordByTimeIntervalEntry(entryRecords, timeInterval)
++recordByTimeIntervalLeaving(leavingRecords, timeInterval)
++calculateDifferencesBetweenEntryAndLeavingRecordsOfVaccinationCenter(entryRecords, leavingRecords, timeInterval);
++getHoursPeriodOfMaximumSumSublist(differences, timeInterval);
++generateTimeInterval(int timeInterval)
++getStartAndEndOfMaximumSumSublist(differences)
++calculateMaximumSumContiguousSublist(differences);
++bruteForceAlgorithm(differences))
++benchmarkAlgorithm(differences)
++calculateSumofContiguousSublist(maximumSum);
+
+
+     }
+
+
+class Company {
+ -designation
++getVaccinationCenterStore()
++getEntryRecordStore()
++getLeavingRecordStore()
++getUserEmail()
+}
+
+class EntryRecord {
++getTimeMS(entryRecord)
++getEntryDateTime()
+}
+
+class LeavingRecord {
++getTimeMS(leavingRecord)
++getLeavingDateTime()
+
+}
+
+class Analysis {
++ Analysis(String vaccinationCenter,differences,maximumSum,hoursPeriod,sum)
+}
+
+package Store <<Folder>>#DDDDDD {
+class VaccinationCenterStore {
++getVaccinationCenters()
+
+     }
+
+class EntryRecordStore {
++getTotalEntriesByVaccinationCenter(vaccinationCenter)
++getEntryRecordsFromVaccinationCenterByDay(vaccinationCenter, day)
+     }
+
+class LeavingRecordStore {
++getTotalExitsByVaccinationCenter(vaccinationCenter)
++getLeavingRecordsFromVaccinationCenterByDay(vaccinationCenter, day)
+
+     }
+    }
+    package shared <<Folder>>#DDDDDD{
+
+    class UtilsCheck{
+    +checkDate(date)
+    +checkTimeInterval(timeInterval)
+
+
+   }
+
+  }
+ }
+  }
+}
+package ExternalLibrary <<Folder>>#DDDDDD {
+package pt.isep.lei.esoft.auth <<Folder>> {
+class UserSession{
++getUserId().toString()
+}
+
+class AuthFacade {
++ getCurrentUserSession()
+}
+
+AnalyzeCenterPerformanceUI ..> AnalyzeCenterPerformanceController
+
+AnalyzeCenterPerformanceController ..> Company
+AnalyzeCenterPerformanceController ..> PerformanceCenter
+AnalyzeCenterPerformanceController ..> UtilsCheck
+
+Company --> VaccinationCenterStore
+Company --> EntryRecordStore
+Company --> LeavingRecordStore
+Company ..> AuthFacade
+
+AnalyzeCenterPerformanceController ..> VaccinationCenterStore
+AnalyzeCenterPerformanceController ..> EntryRecordStore
+AnalyzeCenterPerformanceController ..> LeavingRecordStore
+AnalyzeCenterPerformanceController ..> Analysis
+EntryRecordStore "1" --> "1..*" EntryRecord: owns >
+LeavingRecordStore "1" --> "1..*" LeavingRecord: owns >
+
+
+
+
+
+
+
+
+@enduml

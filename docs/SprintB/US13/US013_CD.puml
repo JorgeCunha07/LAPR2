@@ -1,0 +1,68 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+
+class Administrator {
+   +getId
+   +getName
+   +getNumberOfDoses
+   +getDosagePerVaccine
+   +getAgeGroupToBeAdministered
+   +getTimeBetweenDoses
+   +validateNewVaccine(Vaccine)
+}
+
+class VaccineType
+{
+}
+
+class AddNewVaccineController    {
+  +getId
+  +getType
+  +getName
+  +registerNewVaccine(Id,Type,Name)
+  +SaveNewVaccine()
+}
+note right: Manages the specific criteria of the new vaccine
+
+class AddNewVaccineAdministrationController    {
+ +getDosagePerVaccine
+ +getNumberOfDoses
+ +getAgeGroupToBeAdministered
+ +getTimeBetweenDoses
+ +registerNewVaccineAdministration(DosagePerVaccine,NumberOfDoses,AgeGroupToBeAdministered,TimeBetweenDoses)
+ +SaveNewVaccineAdministration()
+}
+note right: Creates a specific administration process for the new vaccine
+
+
+class RegisterNewVaccine  {
++getNewVaccine
++getNewVaccineAdministration
++SaveVaccine(NewVaccine,NewVaccineAdministration)
+}
+note right: After a new vaccine gets it's attributes and administration method it gets saved and registered in the system to be used.
+
+class RegisterNewVaccineUI  {
+}
+
+
+
+note top of VaccineType : Dependency on US12
+note "The process of registering a new vaccine was split into two. \n If ,in the future, a specific vaccine administration method gets changed \n you just need change it on the administration class, without making any changes to the actual vaccine" as Note1
+AddNewVaccineController .. Note1
+VaccineType "1" ..> "many" AddNewVaccineController
+Note1 .. AddNewVaccineAdministrationController
+RegisterNewVaccineUI ..> AddNewVaccineController : creates
+RegisterNewVaccineUI ..> AddNewVaccineAdministrationController: creates
+AddNewVaccineController *.. AddNewVaccineAdministrationController
+note "We used composition because if the AddNewVaccine class gets destroyed \n then there will be no vaccine to administer therefore \n there will also not be a administration method for a vaccine that does not exist" as Note2
+AddNewVaccineController .. Note2
+Note2 -- AddNewVaccineAdministrationController
+AddNewVaccineAdministrationController ..> RegisterNewVaccine
+Administrator ..> RegisterNewVaccine : manages
+
+
+
+@enduml

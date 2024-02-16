@@ -1,0 +1,36 @@
+@startuml
+
+autonumber
+actor "Receptionist" as R
+
+activate R
+
+R -> ":System" : asks an SNS User if it has an appointment
+activate ":System"
+
+":System" --> R : requests data (SNS User Number)
+deactivate ":System"
+
+R -> ":System" : types requested data
+activate ":System"
+
+":System" --> R : shows data
+deactivate ":System"
+
+R -> ":System" : searches an appointment through the SNS User Number
+activate ":System"
+
+":System" --> R : result
+deactivate ":System"
+
+opt if has an appointment
+R -> ":System" : Registers arrival
+activate ":System"
+
+":System" --> R : informs operation success
+deactivate ":System"
+end
+
+deactivate R
+
+@enduml

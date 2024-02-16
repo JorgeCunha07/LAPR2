@@ -1,0 +1,37 @@
+@startuml
+hide methods
+left to right direction
+skinparam classAttributeIconSize 0
+
+
+class Role {
+  -id
+  -designation
+}
+
+class Employee {
+  -id
+  -adress
+  -phoneNumber
+  -citizenCardNumber
+}
+
+class Administrator {
+}
+
+class Receptionist{
+}
+
+class Nurse{
+}
+
+
+Employee  *-- Role : contains
+Administrator "1" --> "*" Employee : manages >
+Administrator --> Role : is a >
+Receptionist --> Role : is a >
+Nurse --> Role  : is a >
+
+
+
+@enduml

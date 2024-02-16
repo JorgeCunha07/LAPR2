@@ -1,0 +1,47 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class RegisterArrivalOfSNSUserUI{
+}
+
+class RegisterArrivalOfSNSUserController{
+    -Company company
+    -VaccinationCenterStore vaccinationCenterStore
+    +getVacinationCenters()
+    +CheckIfCenterExists(String name)
+    +validateVaccinationCenter(String vaccinationCenterName, ScheduledVaccine scheduledVaccine)
+    +getAppointmentsList()
+    +checkAppointment(String snsUserNumber)
+    +getScheduleVaccine(int index)
+    +registerArrival(String snsUserNumber)
+    +validateDate(LocalDate appointmentDay, ScheduledVaccine scheduledVaccine)
+}
+
+class VaccinationCenter{
+    -String name
+    -int openingHourHour
+    -int openingHourMinute
+    -int closingHourHour
+    -int closingHourMinute
+    +ArrayList<String> getArrivalsList()
+    +registerArrival(String snsUserNumber)
+
+
+}
+
+class ScheduleVaccine{
+     String SNSNumber;
+     String vaccinationCenterName
+     LocalDate date
+     VaccinationCenterSlot slot
+     String vaccineType
+     String vaccineName
+}
+
+
+
+RegisterArrivalOfSNSUserUI ..> RegisterArrivalOfSNSUserController
+RegisterArrivalOfSNSUserController ..> VaccinationCenter
+RegisterArrivalOfSNSUserController ..> ScheduleVaccine
+
+@enduml

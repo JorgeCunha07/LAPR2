@@ -1,0 +1,190 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADMIN
+
+participant ":RegisterNewEmployeeUI" as UI
+participant ":RegisterNewEmployeeController" as CONTROL
+participant "Company" as COMP
+participant ":AuthFacade" as AUTH
+participant "storeEmployee : EmployeeStore" as EmployeeStore
+participant "mapper : UserRoleMapper" as UserRoleMapper
+participant "dtoEmp :EmployeeDTO" as EmployeeDTO
+participant "userroleDTO: UserRoleDTO" as dtooo
+activate ADMIN
+
+
+ADMIN -> UI : Asks to create a new employee
+
+
+activate UI
+
+
+UI --> ADMIN : Requests data (name,adress,phoneNumber,email,citizenCardNumber)
+
+
+deactivate UI
+
+ADMIN -> UI : types requested data
+
+
+activate UI
+
+UI -> CONTROL : rolesList=getUserRoles()
+
+
+activate CONTROL
+activate COMP
+
+
+CONTROL -> COMP : rolesList=getUserRoles()
+COMP -> AUTH : rolesList=getUserRoles()
+
+
+deactivate COMP
+deactivate CONTROL
+activate AUTH
+activate UserRoleMapper
+
+
+AUTH -> UserRoleMapper : mapper = create()
+AUTH -> AUTH :mapper.toDTO(this.roles.getAll())
+ADMIN <-- UI : Shows a List Of Roles and asks to select
+
+
+deactivate UserRoleMapper
+deactivate AUTH
+deactivate UI
+
+
+ADMIN -> UI: Selects Role
+
+
+activate UI
+activate CONTROL
+
+
+UI -> CONTROL : createEmployee(dtoEmp)
+
+
+activate EmployeeStore
+activate COMP
+
+
+CONTROL -> COMP : createEmployee(dtoEmp)
+CONTROL -> COMP : storeEmployee = getEmployeeStore()
+COMP -> EmployeeStore : employeeCreation = createEmployee(dtoEmp)
+
+
+activate EmployeeStore
+
+
+EmployeeStore -> EmployeeStore : id = generateID()
+
+
+deactivate COMP
+
+
+deactivate CONTROL
+activate EmployeeDTO
+
+
+EmployeeStore -> EmployeeDTO :name = getName()
+
+
+deactivate EmployeeStore
+
+
+EmployeeStore -> EmployeeDTO :adress = getAdress()
+EmployeeStore -> EmployeeDTO :phoneNumber = getPhoneNumber()
+EmployeeStore -> EmployeeDTO :citizenCardNumber = getcitizenCardNumber()
+EmployeeStore -> EmployeeDTO :email = getEmail()
+
+
+activate Employee
+
+
+EmployeeStore --> Employee :employeeCreation = createEmployee(id,name,adress,phoneNumber,email,citizenCardNumber)
+
+
+deactivate EmployeeDTO
+activate COMP
+deactivate EmployeeStore
+
+
+COMP -> EmployeeStore : validateEmployee(employeeCreation)
+
+
+deactivate Employee
+activate EmployeeStore
+
+AUTH <- EmployeeStore : existUser(email)
+
+
+activate AUTH
+
+
+UI -> ADMIN : Shows data and requests confirmation
+
+
+deactivate AUTH
+deactivate EmployeeStore
+deactivate COMP
+deactivate UI
+
+
+ADMIN -> UI : Confirms the data
+
+
+activate UI
+activate CONTROL
+activate COMP
+
+
+UI -> CONTROL : saveEmployee(employeeCreation)
+CONTROL -> COMP : pass = generatePassword();
+CONTROL -> COMP : addUserWithRole(EmployeeDTO.getName(),EmployeeDTO.getEmail(),pass,UserRoleDTO.getroleId())
+
+
+activate EmployeeDTO
+activate COMP
+COMP -> COMP : pass = generatePassword();
+deactivate COMP
+COMP -> EmployeeDTO : name = getName()
+
+COMP -> EmployeeDTO : email = getEmail()
+
+
+activate dtooo
+
+
+COMP -> dtooo : roleId = getRoleID()
+
+
+deactivate EmployeeDTO
+activate AUTH
+
+
+COMP -> AUTH: existRole(roleId)
+
+
+deactivate dtooo
+
+
+COMP --> AUTH : addUserWithRole(name,email,pass,roleId)
+
+deactivate AUTH
+
+CONTROL -> COMP : saveEmployee(employeeCreation)
+COMP -> EmployeeStore : saveEmployee(employeeCreation)
+
+
+deactivate COMP
+activate EmployeeStore
+
+
+EmployeeStore -> EmployeeStore : validateEmployee(employeeCreation)
+EmployeeStore -> EmployeeStore : addEmployee(employeeCreation)
+
+UI -> ADMIN : Informs Operation Success
+@enduml

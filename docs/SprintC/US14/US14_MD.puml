@@ -1,0 +1,28 @@
+@startuml
+
+hide methods
+
+class SNSUser {
+- name
+- SNSNumber
+- email
+- phoneNumber
+- birthDate
+}
+
+class Administrator {
+}
+
+class Company{
+ -designation
+}
+
+Company "1"  -- "*" Administrator : owns
+Company "1" -- "*" SNSUser : owns >
+Administrator "1" -- "*" SNSUser : creates >
+
+
+@enduml
+
+
+

@@ -1,0 +1,180 @@
+@startuml
+hide methods
+
+left to right direction
+skinparam classAttributeIconSize 1
+
+class Company{
+ -designation
+}
+
+class HealthCareCenter{
+}
+
+class CommunityMassVaccinationCenter {
+}
+
+class AGES{
+}
+
+class ARS{
+}
+
+class Employee{
+-id
+-name
+-email
+-address
+-phoneNumber
+-citizenCardNumber
+}
+
+class UserRole{
+-id
+-designation
+}
+
+class User{
+-name
+-email
+-password
+}
+class CenterCoordinator{
+}
+
+class Administrator {
+}
+
+class Receptionist{
+}
+
+class Nurse{
+}
+
+class VaccinationCertificate{
+}
+
+class EntryRecord{
+}
+class VaccineAdverseReaction{
+}
+
+class RecoveryRoom{
+ -recoveryTime
+}
+
+class VaccineAdministration{
+ -codeNumber
+
+}
+class VaccineSchedule{
+ -dateTime
+}
+
+class SNSUser {
+  -name
+  -SNSNumber
+  -email
+  -phoneNumber
+  -birthDate
+}
+
+class VaccinationCenter {
+  -name
+  -phoneNumber
+  -email
+  -faxNumber
+  -websiteAddress
+  -openHour
+  -closeHour
+  -slotDuration
+  -fullCapacity
+  -maxVaccinePerSlot
+}
+class TypeOfVaccine{
+ -code
+ -designation
+}
+
+class GroupAge{
+
+}
+class Dosage{
+
+}
+class Vaccine{
+ -nameBrand
+ -numberOfVaccines
+ -timeBetweenDoses
+}
+
+Vaccine "1" -- "*" GroupAge : checks >
+Vaccine "1" -- "*" Dosage : checks >
+
+VaccinationCenter  --  "Address" : has >
+
+CenterCoordinator  ---|>  UserRole : is a
+Company "1"  -- "*" Administrator : owns
+Receptionist  ---|>  UserRole : is a
+Nurse  ---|>  UserRole  : is a
+
+Administrator "1" -- "*" Employee : manages >
+Administrator "1" -- "*" TypeOfVaccine : manages >
+Administrator "1" -- "*" Vaccine : manages >
+Administrator "1" -- "*" VaccinationCenter : manages >
+Administrator "1" -- "*" SNSUser : creates >
+
+Company "1" -- "*" SNSUser : owns >
+Company "1"  -- "*" User : owns
+
+Company "1" -- "*" Employee : employ >
+Company "1" -- "*" UserRole : Compreends >
+Employee  -- UserRole : has/plays >
+User "0..1"-- "1" Employee : relates to <
+User "0..1"-- "1" SNSUser: relates to <
+
+CenterCoordinator "1" -- "1" VaccinationCenter : manages >
+
+
+ARS "1" -- "*" HealthCareCenter : associated with >
+AGES "1" -- "*" HealthCareCenter : associated with >
+
+HealthCareCenter  --|>  VaccinationCenter : is a
+HealthCareCenter "*" -- "*" TypeOfVaccine : administers >
+
+CommunityMassVaccinationCenter "*" -- "1" TypeOfVaccine : administers >
+CommunityMassVaccinationCenter  --|>  VaccinationCenter : is a
+
+
+TypeOfVaccine "1" -- "*" Vaccine : categorizes >
+
+VaccineSchedule "*" -- "1" TypeOfVaccine : takes >
+VaccineSchedule "*" -- "1" Receptionist : checks >
+
+RecoveryRoom "1" -- "*" SNSUser : waits in <
+EntryRecord "1" -- "*" SNSUser : gets registered on <
+
+Nurse "1" -- "*" VaccineAdministration: registers>
+Nurse "1" -- "*" EntryRecord : checks >
+Nurse "1" -- "*" SNSUser : knows the >
+Nurse "1" -- "*" VaccinationCertificate : issues >
+Nurse "1" -- "*" Vaccine : administers >
+Nurse "1" -- "*" VaccinationCenter : works on  >
+Nurse "1" -- "*" VaccineAdverseReaction : register >
+
+
+
+SNSUser "1" -- "*" VaccineAdministration: administered on <
+SNSUser "1" -- "*" VaccineSchedule : created <
+SNSUser "1" -- "*" VaccinationCertificate : requests   >
+
+VaccineAdministration "1" -- "*" VaccineSchedule : fulfils >
+VaccineAdministration "1" -- "*" Vaccine: of >
+VaccineAdministration "1" -- "*" VaccineAdverseReaction : of >
+
+Receptionist "1" -- "*" VaccinationCenter : works on >
+Receptionist "1" -- "*" VaccineSchedule : checks  >
+Receptionist "1" -- "*" EntryRecord : manages  >
+
+
+@enduml

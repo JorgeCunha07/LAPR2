@@ -1,0 +1,83 @@
+@startuml
+autonumber
+'hide footbox
+
+actor "Receptionist" as RP
+participant ":\nRegisterSNSUserUI" as UI
+participant ":\nRegisterSNSUserController" as CTRL
+participant ":\nCompany" as CP
+participant "snsUser:\nSNSUser" as SU
+participant ":\nAuthFacade" as AUTH
+
+
+activate RP
+RP -> UI : asks to register a SNSUser
+activate UI
+UI --> RP : requests data(name, sex, birthDate, phoneNumber, email, address, SNSUserNumber, citizenCardNumber, role)
+deactivate UI
+
+RP -> UI : types requested data
+activate UI
+
+UI -> CTRL :
+activate CTRL
+
+CTRL -> CP : validateSNSUser(snsUser)
+activate CP
+deactivate CTRL
+
+CP -> SU : email=getEmail()
+activate SU
+deactivate SU
+
+CP -> AUTH : verification=existsUser(email)
+activate AUTH
+deactivate AUTH
+
+CP -> CP : checkDuplicates(snsUser)
+activate CP
+deactivate CP
+
+UI --> RP : shows the data and requests confirmation
+deactivate UI
+
+RP -> UI : confirms the data
+activate UI
+
+UI -> CTRL : saveSNSUser()
+activate CTRL
+
+CTRL -> CP : saveSNSUser(snsUser)
+activate CP
+
+
+CP -> CP : validateSNSUser(snsUser)
+activate CP
+deactivate CP
+
+CP -> SU : email=getEmail()
+activate SU
+deactivate SU
+
+CP -> SU : name=getName()
+activate SU
+deactivate SU
+
+CP -> AUTH : addUserWithRole(name, address, sex, phoneNumber, \n e-mail, birthDate, SNSUserNumber, citizenCardNumber,role)
+activate AUTH
+deactivate AUTH
+
+CP -> CP : addSNSUser(snsUser)
+activate CP
+deactivate CP
+deactivate CP
+deactivate CTRL
+
+UI --> RP : informs operation success
+deactivate UI
+deactivate RP
+
+
+
+
+@enduml

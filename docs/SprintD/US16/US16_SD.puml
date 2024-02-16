@@ -1,0 +1,212 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "Center Coordinator" as CC
+participant ":AnalyzeCenterPerformanceUI" as UI
+participant ":AnalyzeCenterPerformanceController" as CONTROLLER
+participant ":UtilsCheck" as UC
+participant ":Company" as COMPANY
+participant "vaccinationCenterStore: VaccinationCenterStore" as VacinationStore
+participant ":AuthFacade" as AUTH
+participant "userSession:UserSession" as UserSession
+participant "entryRecordStore: EntryRecordStore" as EntryStore
+participant "leavingRecordStore: LeavingRecordStore" as LeavingStore
+participant ":PerformanceCenter" as PC
+participant ":Analysis" as ASYS
+participant "vaccinationCentersList: List<VaccinationCenter>"
+participant "vaccinationCenter: VaccinationCenter"
+participant "entryRecord: EntryRecord" as ER
+participant "leavingRecord: LeavingRecord" as LR
+participant "entryRecords: List<EntryRecord>"
+participant "leavingRecords: List<LeavingRecord>"
+participant "entryRecordAuxList: int[]" as eral
+participant "leavingRecordAuxlist: int[]" as lral
+
+participant "differences: int[]"
+participant "maximumSum: int[]"
+participant "hoursPeriod: String[]"
+participant "sum: long"
+
+autonumber
+
+activate CC
+
+
+CC -> UI: Asks to start analyze the performance of a vaccination center
+activate UI
+
+alt vaccinationCenter is found
+
+UI -> CONTROLLER: getVaccinationCenterForTheUser()
+activate CONTROLLER
+
+
+CONTROLLER -> COMPANY: vaccinationCenterStore = getVaccinationCenterStore()
+activate COMPANY
+deactivate COMPANY
+
+
+CONTROLLER -> VacinationStore: getVaccinationCenters()
+activate VacinationStore
+deactivate VacinationStore
+
+CONTROLLER -> COMPANY : getUserEmail()
+activate COMPANY
+
+COMPANY -> AUTH: userSession = getCurrentUserSession()
+activate AUTH
+deactivate AUTH
+COMPANY -> UserSession : email = getUserId().toString()
+activate UserSession
+deactivate UserSession
+
+deactivate COMPANY
+deactivate CONTROLLER
+
+
+
+
+
+UI -> CONTROLLER: validateVaccinationCenter()
+activate CONTROLLER
+
+
+CONTROLLER -> COMPANY: entryRecordStore = getEntryRecordStore()
+activate COMPANY
+deactivate COMPANY
+
+
+CONTROLLER -> COMPANY: leavingRecordStore = getLeavingRecordStore()
+activate COMPANY
+deactivate COMPANY
+
+
+CONTROLLER -> EntryStore: getTotalEntriesByVaccinationCenter(vaccinationCenter)
+activate EntryStore
+deactivate EntryStore
+
+
+CONTROLLER -> LeavingStore: getTotalExitsByVaccinationCenter(vaccinationCenter)
+activate LeavingStore
+deactivate LeavingStore
+deactivate CONTROLLER
+
+loop While Check == False
+
+CC <-- UI: requests typed data(time Interval and the day to analyze)
+deactivate UI
+
+
+CC -> UI: types requested data
+activate UI
+
+UI -> CONTROLLER: checkDate(date)
+activate CONTROLLER
+CONTROLLER -> UC: checkDate(date)
+activate UC
+deactivate UC
+deactivate CONTROLLER
+UI -> CONTROLLER: checkTimeInterval(timeInterval)
+activate CONTROLLER
+CONTROLLER -> UC: checkTimeInterval(timeInterval)
+activate UC
+deactivate UC
+deactivate CONTROLLER
+CC <-- UI: asks to confirm data
+deactivate UI
+
+
+CC -> UI: confirms data
+activate UI
+end loop
+
+UI -> CONTROLLER: analysis = analyzeVaccinationCenterPerformance(day, timeInterval)
+activate CONTROLLER
+
+alt if it has entryRecords and leavingRecords for that day
+CONTROLLER -> EntryStore: entryRecords = getEntryRecordsFromVaccinationCenterByDay(vaccinationCenter, day)
+activate EntryStore
+deactivate EntryStore
+
+
+CONTROLLER -> LeavingStore: leavingRecords = getLeavingRecordsFromVaccinationCenterByDay(vaccinationCenter, day)
+activate LeavingStore
+deactivate LeavingStore
+
+
+CONTROLLER -> PC: differences = calculateDifferencesBetweenEntryAndLeavingRecordsOfVaccinationCenter(entryRecords, leavingRecords, timeInterval)
+activate PC
+PC --> eral**: create()
+PC -> PC: entryRecordAuxList = recordByTimeInterval(entryRecords,timeInterval)
+loop While it has entryRecords
+
+PC -> ER : getTimeMS(entryRecord)
+activate ER
+
+
+ER -> ER : getEntryDateTime()
+activate ER
+deactivate ER
+deactivate ER
+
+end loop
+
+PC --> lral**: create()
+PC -> PC: leavingRecordAuxList = recordByTimeInterval(leavingRecords,timeInterval)
+loop While it has leavingRecords
+
+
+PC -> LR : getTimeMS(leavingRecord)
+activate LR
+
+LR -> LR : getLeavingDateTime()
+activate LR
+deactivate LR
+deactivate LR
+
+end loop
+
+
+deactivate PC
+
+
+CONTROLLER -> PC: maximumSum = calculateMaximumSumContiguousSublist(differences)
+activate PC
+deactivate PC
+
+CONTROLLER -> PC: hoursPeriod = getHoursPeriodOfMaximumSumSublist(differences, timeInterval)
+activate PC
+deactivate PC
+
+
+CONTROLLER -> PC: sum = calculateSumofContiguousSublist(maximumSum)
+activate PC
+
+alt Change by "Center Coordinator" .
+PC -> PC: sum = bruteForceAlgorithm(differences))
+activate PC
+deactivate PC
+
+PC -> PC: sum = benchmarkAlgorithm(differences)
+activate PC
+deactivate PC
+
+end
+
+deactivate PC
+
+
+
+CONTROLLER --> ASYS** :create(vaccination.getName,differences,maximumSum,hoursPeriod,sum)
+
+deactivate CONTROLLER
+
+CC <-- UI: shows the results of the analysis
+end
+end
+deactivate UI
+
+
+
+
+@enduml

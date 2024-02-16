@@ -1,0 +1,52 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+class Company{
++ getListOfVaccines()
+}
+class Administrator {
+
+}
+
+class VaccineType
+{
+}
+
+class AddNewVaccineController    {
+  + AddNewVaccineController()
+  + createVaccine(Vaccine vaccine)
+  + vaccineValidation(Vaccine vaccine)
+}
+
+
+class AddNewVaccineAdministrationController    {
+ + createAdministrationProcess(AdministrationProcess administrationProcess)
+ + AdministrationProcessValidation(AdministrationProcess administrationProcess)
+
+}
+
+
+
+
+class NewVaccineUI  {
+}
+
+
+
+
+
+VaccineType "1" ..> "many" AddNewVaccineController
+NewVaccineUI ..> AddNewVaccineController
+AddNewVaccineAdministrationController ..> AddNewVaccineController
+AddNewVaccineController ..>   Company
+
+Administrator ..> NewVaccineUI
+
+
+
+
+
+
+
+@enduml

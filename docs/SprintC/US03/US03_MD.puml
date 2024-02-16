@@ -1,0 +1,72 @@
+@startuml
+hide methods
+skinparam classAttributeIconSize 0
+
+
+class Company {
+  -designation
+}
+
+class SNSUser{
+- name
+- sex
+- birthDate
+- phoneNumber
+- email
+- address
+- SNSUserNumber
+- citizenCardNumber
+}
+
+class Administrator {
+ }
+
+class Receptionist {
+}
+
+class SNSUser {
+  -name
+  -function
+  -phone
+  -email
+}
+
+class Employee{
+-id
+-name
+-email
+-address
+-phoneNumber
+-citizenCardNumber
+}
+
+class UserRole{
+-id
+-designation
+}
+
+class User {
+  -name
+  -email
+  -password
+}
+
+Company "1" -- "*" Administrator : owns >
+Company "1" -- "*" SNSUser : owns >
+Company "1"  -- "*" User : owns
+Company "1" -- "*" Employee : employ >
+Company "1" -- "*" UserRole : Compreends >
+
+User "0..1"-- "1" Employee : relates to <
+SNSUser "0..1" -- "1" User: becomes >
+
+Employee  -- UserRole : has/plays >
+Administrator "1" -- "*" Employee : is an >
+
+Receptionist "*" -- "1" SNSUser: registers >
+Receptionist  ---|>  UserRole : is a
+
+
+
+
+@enduml

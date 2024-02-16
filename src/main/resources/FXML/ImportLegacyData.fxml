@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="484.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableview" layoutY="82.0" prefHeight="402.0" prefWidth="981.0">
+        <columns>
+          <TableColumn fx:id="snsUser" prefWidth="75.0" text="Sns User" />
+          <TableColumn fx:id="vacName" prefWidth="75.0" text="Vaccine " />
+            <TableColumn fx:id="dose" prefWidth="75.0" text="Dose" />
+            <TableColumn fx:id="lotNum" prefWidth="75.0" text="Lot" />
+            <TableColumn fx:id="schedule" prefWidth="75.0" text="Scheduled" />
+            <TableColumn fx:id="arrival" prefWidth="103.0" text="Arrival" />
+            <TableColumn fx:id="administered" prefWidth="71.0" text="Administered" />
+            <TableColumn fx:id="leaving" prefWidth="87.0" text="Leaving" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-7.0" layoutY="14.0" prefHeight="35.0" prefWidth="981.0" text="Showing Legacy Data" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

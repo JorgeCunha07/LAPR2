@@ -1,0 +1,71 @@
+@startuml
+
+left to right direction
+actor "Centre Coordinator" #white;line:green
+actor "Receptionist" #white;line:orange
+actor "Administrator" #white;line:red
+actor "SNS User" #white;line:purple
+actor "Nurse" #white;line:blue
+
+
+usecase " UC01 - Schedule a vaccination" as UC1
+usecase " UC02 - Schedule a vaccination" as UC2
+usecase " UC03 - Register a new SNS User" as UC3
+usecase " UC04 - Register the arrival of a SNS user to take the vaccine" as UC4
+usecase " UC05 - Consult the users in the waiting room of a vaccination center" as UC5
+usecase " UC09 - Register a new vaccination Center" as UC9
+usecase " UC10 - Register a new Employee" as UC10
+usecase " UC11 - Get a list of employees with a given function/role" as UC11
+usecase " UC12 - Register a new vaccine type" as UC12
+usecase " UC13 - Specify a new vaccine and its administration process" as UC13
+usecase " UC14 - Load a set of users from a CSV file" as UC14
+usecase " UC18 - Get a list of all vaccines" as UC18
+
+usecase " UC?? - Issues and send Vaccination Certificate" as UC19
+usecase " UC?? - Check the list of SNS Users at the Vaccination Centre" as UC20
+usecase " UC?? - Checks SNS User info and health condition" as UC21
+usecase " UC?? - Register the administrated vaccine" as UC22
+usecase " UC?? - Register reactions " as UC23
+usecase " UC?? - Generate reports" as UC24
+usecase " UC?? - Analyze data from other centers" as UC25
+usecase " UC?? - Monitoring Vaccination Process" as UC26
+usecase " UC?? - Plan Vaccination" as UC27
+usecase " UC?? - Register SNS user entering " as UC28
+usecase " UC?? - Request Certificate of the Vaccination " as UC29
+usecase " UC?? - Register a new vaccine" as UC30
+
+:SNS User: -down- UC1 #white;line:purple
+
+:Receptionist: -down- UC2 #white;line:orange
+:Receptionist: -down- UC3 #white;line:orange
+:Receptionist: -down- UC4 #white;line:orange
+
+:Nurse: -down- UC5 #white;line:blue
+
+:Administrator: -down- UC9 #white;line:red
+:Administrator: -down- UC10 #white;line:red
+:Administrator: -down- UC11 #white;line:red
+:Administrator: -down- UC12 #white;line:red
+:Administrator: -down- UC13 #white;line:red
+:Administrator: -down- UC14 #white;line:red
+
+:Centre Coordinator: -down- UC18 #white;line:green
+
+:Nurse: -down- UC19 #white;line:blue
+:Nurse: -down- UC20 #white;line:blue
+:Nurse: -down- UC21 #white;line:blue
+:Nurse: -down- UC22 #white;line:blue
+:Nurse: -down- UC23 #white;line:blue
+
+:Centre Coordinator: -down- UC24 #line:green
+:Centre Coordinator: -down- UC25 #line:green
+:Centre Coordinator: -down- UC26 #white;line:green
+
+:SNS User: -down- UC27 #white;line:purple
+
+Receptionist -down- UC28 #line:orange
+
+:SNS User: -down- UC29 #white;line:purple
+
+:Administrator: -down- UC30 #white;line:red
+@enduml

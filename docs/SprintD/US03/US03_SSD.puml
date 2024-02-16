@@ -1,0 +1,28 @@
+@startuml
+
+autonumber
+actor "Receptionist" as OE
+
+activate OE
+
+OE -> ":System" : asks to register a new SNS User
+activate ":System"
+
+":System" --> OE : requests some data about the user (name, sex, phoneNumber, email, address, birthDate, SNSUserNumber, citizenCardNumber)
+deactivate ":System"
+
+OE -> ":System" :shows and types the requested data
+activate ":System"
+
+":System" --> OE : requests a confirmation of the data
+deactivate ":System"
+
+OE -> ":System" : confirms the data
+activate ":System"
+
+":System" --> OE : informs operation success
+deactivate ":System"
+
+deactivate OE
+
+@enduml

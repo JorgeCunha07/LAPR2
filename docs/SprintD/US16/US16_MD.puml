@@ -1,0 +1,80 @@
+@startuml
+hide methods
+
+left to right direction
+skinparam classAttributeIconSize 1
+
+class Company{
+ -designation
+}
+
+class Employee{
+-id
+-name
+-email
+-address
+-phoneNumber
+-citizenCardNumber
+}
+
+class UserRole{
+-id
+-designation
+}
+
+class CenterCoordinator{
+}
+
+class EntryRecord{
+entry date/time
+}
+class LeavingRecord{
+leaving date/time
+}
+
+class VaccineAdministration{
+ -codeNumber
+}
+
+class VaccinationCenter {
+  -name
+  -phoneNumber
+  -email
+  -faxNumber
+  -websiteAddress
+  -openHour
+  -closeHour
+  -slotDuration
+  -fullCapacity
+  -maxVaccinePerSlot
+}
+
+class VaccineSchedule{
+ -dateTime
+ -Vaccine Type
+ -Vaccination Center
+ -schedule date/time
+}
+
+VaccinationCenter  --  "Address" : has >
+VaccineSchedule "1" -- "1" EntryRecord : has >
+VaccineSchedule "1" -- "1" LeavingRecord  : has >
+VaccinationCenter  "1" -- "0..*" VaccineAdministration : are related to <
+
+VaccinationCenter "1" -- "1..*" VaccineSchedule  : is/are associated with >
+
+CenterCoordinator  ---|>  UserRole : is a
+
+
+Company "1" -- "*" Employee : employ >
+Company "1" -- "*" UserRole : Compreends >
+
+Employee  -- UserRole : has/plays >
+
+CenterCoordinator "1" -- "1" VaccinationCenter : manages >
+
+
+
+
+
+@enduml

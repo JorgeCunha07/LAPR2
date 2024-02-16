@@ -1,0 +1,42 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Role{
+-float id
+-String designation
++createRole(id,designation)
+}
+
+class Administrator {
+}
+
+class Receptionist{
+}
+
+class Nurse{
+}
+
+class GetListWithGivenRoleUI{
+
+}
+class GetListWithGivenRole{
++getName
++getRole
++addToList()
+}
+
+
+Receptionist  -->  Role :extends >
+Nurse -->  Role : extends >
+
+
+Administrator "1" --> "*" Role :extends >
+
+Employee  *-- Role : contains
+
+GetListWithGivenRole   -[dashed]->  Employee
+GetListWithGivenRoleUI -[dashed]-> GetListWithGivenRole  : create
+
+
+
+@enduml

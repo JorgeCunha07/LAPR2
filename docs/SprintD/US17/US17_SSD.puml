@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Center Coordinator" as CC
+
+activate CC
+CC -> ":System": Wants to import legacy data from a file
+activate ":System"
+CC <- ":System": requests file name
+deactivate ":System"
+CC -> ":System": inserts file name
+activate ":System"
+CC <- ":System": requests sorting method
+deactivate ":System"
+CC -> ":System": selects sorting method
+activate ":System"
+CC <- ":System": requests sorting criteria (Arrival or Leaving time)
+deactivate ":System"
+CC -> ":System": selects sorting criteria
+activate ":System"
+CC <- ":System": requests sorting order (Ascending or Descending)
+deactivate ":System"
+CC -> ":System": selects sorting order
+activate ":System"
+CC <- ":System": shows sorted data by the chosen criteria
+
+
+@enduml

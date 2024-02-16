@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.RecordTheAmnController">
+   <children>
+      <ImageView fitHeight="459.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/photo-1600456899121-68eda5705257.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutX="138.0" layoutY="89.0" prefHeight="10.0" prefWidth="187.0" text="Select a Vaccination Center:" />
+      <ComboBox fx:id="VaccinationCenter" layoutX="137.0" layoutY="115.0" onAction="#set" prefWidth="150.0" />
+      <Label layoutX="139.0" layoutY="147.0" prefHeight="17.0" prefWidth="159.0" text="Select an User :" />
+      <ComboBox fx:id="Users" layoutX="138.0" layoutY="169.0" onAction="#set2" prefWidth="150.0" />
+      <Label layoutX="139.0" layoutY="201.0" prefHeight="17.0" prefWidth="123.0" text="Select a Vaccine :" />
+      <ComboBox fx:id="Vaccine" layoutX="138.0" layoutY="224.0" onAction="#set3" prefWidth="150.0" />
+      <Label layoutX="139.0" layoutY="258.0" prefHeight="17.0" prefWidth="132.0" text="Introduce Lot Number :" />
+      <TextField fx:id="LOTnum" layoutX="141.0" layoutY="281.0" onAction="#set4" />
+      <ImageView fitHeight="145.0" fitWidth="241.0" layoutX="398.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../png/inem-destaque-dgs-celebra-122-anos-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="RecordLeaving" layoutX="340.0" layoutY="294.0" mnemonicParsing="false" onAction="#HandleRecordLeaving" prefHeight="62.0" prefWidth="211.0" text="RecordLeaving" />
+   </children>
+</AnchorPane>

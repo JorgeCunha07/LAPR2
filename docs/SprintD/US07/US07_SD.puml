@@ -1,0 +1,87 @@
+@startuml
+autonumber
+
+actor "Receptionist" as R
+
+participant ":RegisterSNSUserArrivalUI" as UI
+participant ":RegisterSNSUserArrivalController" as CTRL
+participant ":VaccinationCenterStore" as VCS
+participant ":Company" as C
+participant ":VaccinationCenter" as VC
+
+
+activate R
+
+R -> UI : asks to register an arrival
+activate UI
+
+UI -> CTRL : vaccinationCenters = getVaccinationCenters()
+activate CTRL
+
+
+CTRL -> VCS : vaccinationCenters = getVaccinationCenters()
+activate VCS
+deactivate VCS
+
+deactivate C
+deactivate CTRL
+UI --> R : shows a list with all the available vaccination centers
+deactivate UI
+
+R -> UI : selects one vaccination center
+activate UI
+
+UI -> CTRL : CheckIfCenterExists(vaccinationCenterName)
+activate CTRL
+CTRL -> VCS : CheckIfCenterExists(String name)
+activate VCS
+deactivate VCS
+deactivate CTRL
+
+
+UI --> R : requests data (snsNumber)
+
+deactivate UI
+deactivate VCS
+
+R -> UI : types data (snsNumber)
+activate UI
+
+
+UI -> CTRL : checkAppointment(snsUserNumber)
+activate CTRL
+deactivate CTRL
+
+CTRL -> C : getScheduledVaccineStore()
+activate C
+
+
+activate CTRL
+C -> CTRL : getScheduledVaccine()
+deactivate C
+
+UI -> CTRL : validateVaccinationCenter(vaccinationCenterName, scheduledVaccine)
+
+UI -> CTRL : validateDate(dateTime, scheduledVaccine)
+
+CTRL --> UI : result
+deactivate CTRL
+
+UI --> R : result
+
+
+
+UI -> CTRL : registerArrival(snsUserNumber)
+activate CTRL
+
+
+CTRL -> VC : registerArrival(snsUserNumber)
+activate VC
+deactivate VC
+
+
+deactivate VC
+deactivate CTRL
+UI --> R : informs operation success
+
+@enduml

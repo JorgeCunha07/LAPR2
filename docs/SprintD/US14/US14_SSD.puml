@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Administrator as ADM
+
+activate ADM
+ADM -> ":System": asks to load a set of users from a CSV file
+activate ":System"
+ADM <- ":System": requests the path of the CSV file
+deactivate ":System"
+ADM -> ":System": types the CSV file path
+activate ":System"
+ADM <- ":System": shows the SNS Users that are present in the file and requests a confirmation
+deactivate ":System"
+ADM -> ":System": confirms the users
+activate ":System"
+ADM <- ":System": informs operation success
+deactivate ":System"
+@enduml

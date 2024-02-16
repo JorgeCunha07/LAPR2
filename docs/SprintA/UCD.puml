@@ -1,0 +1,57 @@
+@startuml
+
+left to right direction
+actor "Centre Coordinator" #white;line:green
+actor "Receptionist" #white;line:orange
+actor "Administrator" #white;line:red
+actor "SNS User" #white;line:purple
+actor "Nurse" #white;line:blue
+
+usecase " UC1 - Monitoring Vaccination Process" as UC1 #white;line:green
+usecase " UC2 - Plan Vaccination" as UC2 #white;line:black
+usecase " UC3 - Register SNS user entering " as UC3 #white;line:orange
+usecase " UC4 - Request Certificate of the Vaccination " as UC4 #white;line:purple
+
+usecase " UC5 - Register a new vaccine" as UC5  #white;line:red
+usecase " UC6 - Register a new SNS User" as UC6 #white;line:red
+usecase " UC7 - Register a new Center Coordinator" as UC7 #white;line:red
+usecase " UC8 - Register a new Receptionist" as UC8 #white;line:red
+usecase " UC9 - Register a new nurse" as UC9 #white;line:red
+usecase " UC10 - Register a new Type of vaccine" as UC10 #white;line:red
+usecase " UC11 - Register a new vaccination Centre" as UC11 #white;line:red
+
+usecase " UC12 - Issues and send Vaccination Certificate" as UC12 #white;line:blue
+usecase " UC13 - Check the list of SNS Users at the Vaccination Centre" as UC13 #white;line:blue
+usecase " UC14 - Checks SNS User info and health condition" as UC14 #white;line:blue
+usecase " UC15 - Register the administrated vaccine" as UC15 #white;line:blue
+usecase " UC16 - Register reactions " as UC16 #white;line:blue
+usecase " UC17 - Generate reports" as UC17 #white;line:green
+usecase " UC18 - Analyze data from other centers" as UC18 #white;line:green
+
+note right of UC2 : After Planning ,(SNS User) allow SMS from DGS.
+
+Receptionist -down- UC3 #line:orange
+
+:Centre Coordinator: -down- UC1 #line:green
+:Centre Coordinator: -down- UC17 #line:green
+:Centre Coordinator: -down- UC18 #line:green
+
+:Administrator: -down- UC5
+:Administrator: -down- UC6
+:Administrator: -down- UC7
+:Administrator: -down- UC8
+:Administrator: -down- UC9
+:Administrator: -down- UC10
+:Administrator: -down- UC11
+
+:SNS User: -down- UC2 #line:purple
+
+:SNS User: -down- UC4 #line:purple
+
+:Nurse: -down- UC2 #line:blue
+:Nurse: -down- UC12 #line:blue
+:Nurse: -down- UC13 #line:blue
+:Nurse: -down- UC14 #line:blue
+:Nurse: -down- UC15 #line:blue
+:Nurse: -down- UC16 #line:blue
+@enduml

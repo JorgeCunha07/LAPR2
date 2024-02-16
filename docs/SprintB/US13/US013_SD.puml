@@ -1,0 +1,56 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as Admin
+
+participant ":RegisterNewVaccineUI" as UI
+participant ":AddNewVaccineController" as NVC
+participant ":AddNewVaccineAdministration" as NVAC
+participant ":RegisterNewVaccine" as RVAC
+participant ":VaccineType" as VACT
+participant ":Vaccine" as VAC
+participant ":NewVaccine" as NVACCI
+participant ":RegisterNewVaccine" as RVAC
+
+activate Admin
+Admin -> UI : Wants to specify a new vaccine and its administration process
+
+activate UI
+UI --> Admin : requests data related to the vaccine (type, id, name)
+Admin -> UI : provides type
+activate NVC
+UI -> NVC : getVaccineData(type)
+NVC -> VACT : vac = getType()
+deactivate NVC
+
+UI ->Admin : requests for vaccine id and name
+
+
+
+Admin -> UI : provides id and name
+UI -> NVC : getVaccineData(id, name)
+NVC -> NVACCI : getVaccineId()
+NVC -> NVACCI: getVaccineName()
+deactivate NVC
+
+activate NVAC
+UI -> Admin: requests data related to the new vaccine administration(dosage, numberOfDoses, AgeGroup)
+
+Admin -> UI: provides vaccine administration data
+
+UI -> NVAC : getVaccineAdministrationData(dosage, doses, ageGroup, timeBetweenDoses)
+activate NVACCI
+NVAC -> NVACCI: GetDosage();
+NVAC -> NVACCI: GetDoses();
+NVAC -> NVACCI: ageGroup();
+NVAC -> NVACCI: timeBetweenDoses();
+NVACCI -> UI: data
+deactivate NVACCI
+deactivate NVAC
+UI -> Admin: requests for confirmation
+Admin -> UI: confirms data
+activate RVAC
+UI -> RVAC : SaveVaccine (NewVaccine, NewVaccineAdministration)
+UI -> Admin: Informs the sucess of the vaccine operation sucess
+
+@enduml

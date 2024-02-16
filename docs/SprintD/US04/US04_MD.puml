@@ -1,0 +1,21 @@
+@startuml
+hide methods
+skinparam classAttributeIconSize 0
+
+class SNSUser{
+}
+
+class Receptionist {
+}
+
+class VaccinationCenter{
+}
+
+
+
+Receptionist -right SNSUser : registers the arrival of >
+Receptionist --- VaccinationCenter : stores the list of arrivals in >
+
+
+
+@enduml

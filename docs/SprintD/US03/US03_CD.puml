@@ -1,0 +1,35 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+class SNSUser {
+- String name
+- String sex
+- String birthDate
+- String address
+- int phoneNumber
+- String email
+- int SNSUserNumber
+- int citizenCardNumber
+}
+
+class Company {
+- String designation
++saveSNSUser(snsUser)
++addUserWithRole(name, email, generatePassword, snsUser)
+}
+
+class RegisterSNSUserController {
++saveCreatedSNSUser(snsUser)
+}
+
+class RegisterSNSUserUI {
+}
+
+RegisterSNSUserUI ..> RegisterSNSUserController
+RegisterSNSUserController ..> Company
+Company ..> SNSUser
+
+
+
+@enduml

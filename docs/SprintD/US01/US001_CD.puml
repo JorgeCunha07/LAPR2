@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package app <<Folder>> {
+package ui <<Folder>> {
+class ScheduleVaccineUI {
+
+    }
+}
+
+package controller <<Folder>> {
+class ScheduleVaccineController {
++ ScheduleVaccineControler()
++ getScheduledVaccine()
++ saveScheduledVaccine()
++ createScheduledVaccine()
++ checkIfCenterExists()
++ setVaccinationCenterWithName
++ ValidateScheduledVaccine
+
+}
+}
+
+package domain <<Folder>> {
+package model <<Folder>> {
+class Company {
++ getListOfVaccines()
++ getVaccinationCenterStore()
++ SaveVaccinationCenter()
++ getScheduledVaccineStore()
++ SaveSchedule()
+}
+
+class ScheduledVaccine {
+- SnsNumber
+- VaccinationCenterName
+- date
+- slot
+- vaccineType
+- vaccineName
++ ScheduledVaccine(SNSNumber,vaccinationCenterName,date,slot,vaccineType,vaccineName)
++ getSNSNumber()
++ setSNSNumber(SnsNumber)
++ getVaccinationCenterName()
++ setVaccinationCenterName(VaccinationCenterName)
++ getSlot()
++ setSlot(slot)
++ getDate()
++ setDate(date)
++ getVaccineType()
++ setVaccineType(vaccineType)
++ getVaccineName()
++ setVaccineName(vaccineName)
+}
+
+package Store <<Folder>> {
+class ScheduledVaccineStore {
++ listOfScheduledVaccines
++ getListOfScheduledVaccines()
++ setListOfScheduledVaccines(listOfScheduledVaccines)
++ addToList(scheduledVaccine)
+
+    }
+   }
+  }
+ }
+
+
+
+ScheduleVaccineUI ..> ScheduleVaccineController
+
+ScheduleVaccineController ..> Company
+ScheduleVaccineController ..> ScheduledVaccineStore
+
+
+Company --> ScheduledVaccineStore
+Company ..> ScheduledVaccine
+
+
+ScheduledVaccineStore "1" --> "1..*" ScheduledVaccine: owns >
+
+@enduml

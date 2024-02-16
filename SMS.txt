@@ -1,0 +1,7 @@
+ Scheduled vaccine: 
+ SNS Number: 444444444 
+ Vaccination Center: Centro 
+ Date: 15/06/2022 
+ Time: 09:30 
+ Capacity: 2 | Scheduled: 1  
+ Vaccine Type: covid 

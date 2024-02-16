@@ -1,0 +1,109 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Company{
+ -String designation
+
++getUserRoles()
++boolean createEmployee((dtoEmp)
++getEmployeeStore()
+generatePassword()
++boolean addUserWithRole(EmployeeDTO.getName(),EmployeeDTO.getEmail(),pass,UserRoleDTO.getroleId());
++boolean saveEmployee(employeeCreation)
+}
+
+class EmployeeDTO{
+ +generateID()
+ +getName()
+ +getEmail()
+ +getPassword()
+ +getAddress()
+ +getPhoneNumber()
+ +getCitizenCardNumber()
+}
+
+class EmployeeStore{
++boolean createEmployee(dtoEmp)
+ generateID()
++boolean validateEmployee(employeeCreation)
++boolean saveEmployee(employeeCreation)
++boolean validateEmployee(employeeCreation)
++boolean addEmployee(employeeCreation)
+}
+
+class UserRoleDTO{
+ +getroleId()
+ +getDescription()
+}
+
+
+
+class AuthFacade{
+      +getUserRoles()
+      +mapper.toDTO(this.roles.getAll()
+      +boolean existUser(email)
+      +boolean existRole(roleId)
+      +boolean addUser (String name, String email, String pwd)
+      }
+
+ class  Employee{
+-int id
+-String name
+-String email
+-String address
+-float phoneNumber
+-String citizenCardNumber
++boolean createEmployee(int id,String address,float phoneNumber,String email,String citizenCardNumber)
+}
+
+class UserRoleMapper{
++create()
+
+}
+
+class UserRole{
+-int id
+-String designation
+
+}
+
+ class  User{
+-String name
+-String email
+-String password
++boolean createUser(id,name,email)
+}
+
+
+class RegisterEmployeeUI{
+
+}
+class RegisterEmployeeController{
++getUserRoles()
++boolean createEmployee(dtoEmp)
++boolean saveEmployee(employeeCreation)
+
+}
+
+
+RegisterEmployeeUI ..> RegisterEmployeeController
+
+RegisterEmployeeController ..> Company
+
+
+Company --> AuthFacade
+Company --> EmployeeStore
+Company --> EmployeeDTO
+Company --> UserRoleDTO
+Company ..> UserRole
+
+
+EmployeeStore --> Employee
+
+AuthFacade ..> UserRoleMapper
+AuthFacade --> User
+
+
+
+
+@enduml

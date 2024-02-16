@@ -1,0 +1,39 @@
+@startuml
+
+participant "Company" as COMP
+participant ":AuthFacade" as AUTH
+participant ": SNSUserStore" as SNSUserStore
+participant "snsUser : SNSUser" as SNSUser
+participant "roleDto: UserRoleDTO" as DTO
+
+autonumber
+[o--> COMP : addUserWithRole(snsUser,roleDTO,pass)
+activate COMP
+
+    COMP -> SNSUser: name = getName()
+
+    activate SNSUser
+    deactivate SNSUser
+
+    COMP -> SNSUser: email = getEmail()
+
+    activate SNSUser
+    deactivate SNSUser
+
+    COMP -> DTO: roleId = getId()
+
+    activate DTO
+    deactivate DTO
+
+    COMP -> AUTH: existsRole(roleId)
+
+    activate AUTH
+    deactivate AUTH
+
+
+    COMP --> AUTH : addUserWithRole(name,email,pass,roleId)
+    activate AUTH
+
+    deactivate AUTH
+    deactivate COMP
+@enduml

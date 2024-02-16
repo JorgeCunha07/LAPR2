@@ -1,0 +1,28 @@
+@startuml
+autonumber
+actor "Administrator" as Admin
+
+activate Admin
+Admin -> ":System" : Wants to specify a new vaccine and its administration process
+activate ":System"
+":System" --> Admin : requests data related to the vaccine (code,name)
+deactivate ":System"
+
+Admin -> ":System" : inserts requested data
+activate ":System"
+":System" --> Admin : requests data related to the vaccine administration (age group to be administered , \n number of doses, dosage and time between doses)
+deactivate ":System"
+
+Admin -> ":System" : inserts requested data
+activate ":System"
+":System" --> Admin : shows all vaccine data and requests confirmation
+deactivate ":System"
+
+Admin -> ":System" : confirms the data
+activate ":System"
+":System" --> Admin : informs vaccine specification sucess
+deactivate ":System"
+
+deactivate Admin
+
+@enduml

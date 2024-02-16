@@ -1,0 +1,131 @@
+@startuml
+autonumber
+'hide footbox
+
+actor "Center Cordinator" as CC
+participant ":LegacyDataUI" as UI
+participant "LegacyDataController" as CTRL
+participant ":entryDataRecord" as EDR
+participant ":leavingDataRecord" as LDR
+participant "LegacyDataStore" as LegacyStore
+
+
+
+activate CC
+CC -> UI : wishes to import legacy data from a file
+activate UI
+
+
+ UI --> CC : Asks if the user wishes to sort all the data or only the data from the file
+ CC -> UI : selects its option
+ deactivate UI
+
+alt The user wishes to sort all the data
+UI --> CTRL : controller.importLegacyData(entryData, LeavingData)
+activate CTRL
+activate UI
+CTRL -> EDR :
+deactivate CTRL
+activate EDR
+CTRL <- EDR : legacyData
+deactivate EDR
+CTRL -> LDR :
+activate LDR
+CTRL <- LDR : leavingData
+deactivate LDR
+CTRL -> LegacyStore : getLegacyData().add(legacyData)
+deactivate CTRL
+
+
+alt The user wishes to sort only the file data
+
+UI -> CC : requests for the user to select the vaccination center name.
+activate UI
+activate CP
+UI -> CP : getVaccinationCenterStore()
+activate VCSTORE
+CP -> VCSTORE : getVaccinationCenters()
+VCSTORE -> UI : ArrayList<VaccinationCenter>
+deactivate VCSTORE
+deactivate CP
+UI -> CC : shows all available Vaccination Centers.
+CC -> UI : types the name of the Vaccination Center he wants. : VacinationCenter
+deactivate UI
+
+
+UI -> CC : requests for the user to select the date.
+activate UI
+activate VCDATE
+UI -> VCDATE : getListOfDates()
+VCDATE -> UI : ArrayList<VaccinationCenterDate>
+deactivate VCDATE
+UI -> CC : checks for date : date
+deactivate UI
+
+UI -> CC : requests for the user to select a slot on the choosen date.
+activate UI
+activate VCDATE
+UI -> VCDATE : getListOfSlots()
+activate VCSLOT
+VCDATE -> VCSLOT : ArrayList<VaccinationCenterSlot>
+deactivate VCDATE
+VCSLOT -> UI : return ArrayList<VaccinationCenterSlot>
+deactivate VCSLOT
+UI -> CC : prints available getListOfSlots
+CC -> UI   : selects an available slot : choosenSlot
+deactivate UI
+
+UI -> CC : requests for the user to select a vaccine types
+activate UI
+activate VACTPS
+UI -> VACTPS : getVaccineTypes
+VACTPS -> UI : return ArrayList<VaccineType>
+deactivate VACTPS
+UI -> CC : prints the available vaccine types
+CC -> UI : selects the vaccine type : vaccineType
+deactivate UI
+
+UI -> CC : selects a vaccine from the selected vaccine type
+activate UI
+UI -> VACTP : checks for the selected ":\VaccineType"
+VACTP -> CP : getListOfVaccines()
+deactivate VACTP
+CP -> UI : assigns a vaccine from the given type : vaccine
+deactivate UI
+
+UI -> CTRL : createScheduledVaccine(SnsNumber,vaccinationCenter.getName(),date, choosenSlot,vaccineType.getVaccinetechnology(),vaccine.getName())
+CTRL -> SCV : new ScheduledVaccine(SnsNumber,vaccinationCenter.getName(),date, choosenSlot,vaccineType.getVaccinetechnology(),vaccine.getName())
+activate UI
+activate CTRL
+activate SCV
+SCV -> CTRL : scheduledVaccine
+deactivate SCV
+UI -> CTRL : saveScheduledVaccine(scheduledVaccine)
+CTRL -> CP : company.SaveSchedule(scheduledVaccine)
+activate CP
+CP -> STORE : return scheduledVaccineStore.addToList(scheduledVaccine)
+activate STORE
+deactivate CP
+deactivate STORE
+deactivate CTRL
+deactivate UI
+
+UI -> CC : asks if he wishes to receive a text message
+activate UI
+CC -> UI : if SNS user wishes to receive a message
+UI -> CC : writer.println(scheduledVaccine);
+deactivate UI
+
+UI -> CC : informs the vaccination schedulling sucess.
+
+deactivate CC
+end
+end
+
+
+
+
+
+
+
+@enduml

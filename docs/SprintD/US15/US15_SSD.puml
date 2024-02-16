@@ -1,0 +1,14 @@
+@startuml
+
+autonumber
+
+actor CenterCordinator as CR
+activate CenterCordinator
+
+System --> CenterCordinator : requests date of the day to be checked
+CenterCordinator -> System : provides the date
+System --> CenterCordinator : shows the number of the fully vaccinated useres in that day and asks if the CR wants to export this stats to a CSV file
+CenterCordinator -> System : confirms export to a CSV file
+System --> CenterCordinator : generates file and confirms the sucess of the operation
+
+@enduml

@@ -1,0 +1,119 @@
+@startuml
+autonumber
+'hide footbox
+
+actor "SNS User" as SNSUser
+participant ":\nSNSUser" as SNS
+participant ":\nScheduleVaccineUI" as UI
+participant ":\nCompany" as CP
+participant "VaccinationCenterStore :\n VaccinationCenterStore" as VCSTORE
+participant "VaccinationCenterDate :\n VaccinationCenterDate" as VCDATE
+participant "VaccinationCenterSlot :\n VaccinationCenterSlot" as VCSLOT
+participant ":\nScheduleVaccineController" as CTRL
+participant ":\VaccineType" as VACTP
+participant ":\VaccineTypes" as VACTPS
+
+participant "ScheduledVaccine" as SCV
+participant "ScheduledVaccineStore:\nScheduledVaccineStore" as STORE
+
+
+
+activate SNSUser
+SNSUser -> UI : asks to schedule a vaccine.
+activate UI
+
+loop while SNSUser number not validated
+ UI --> SNSUser : requests SNS User number
+ SNSUser -> UI : types requested data : SnsNumber
+ deactivate UI
+end
+
+
+UI -> SNSUser : requests for the user to select the vaccination center name.
+activate UI
+activate CP
+UI -> CP : getVaccinationCenterStore()
+activate VCSTORE
+CP -> VCSTORE : getVaccinationCenters()
+VCSTORE -> UI : ArrayList<VaccinationCenter>
+deactivate VCSTORE
+deactivate CP
+UI -> SNSUser : shows all available Vaccination Centers.
+SNSUser -> UI : types the name of the Vaccination Center he wants. : VacinationCenter
+deactivate UI
+
+
+UI -> SNSUser : requests for the user to select the date.
+activate UI
+activate VCDATE
+UI -> VCDATE : getListOfDates()
+VCDATE -> UI : ArrayList<VaccinationCenterDate>
+deactivate VCDATE
+UI -> SNSUser : checks for date : date
+deactivate UI
+
+UI -> SNSUser : requests for the user to select a slot on the choosen date.
+activate UI
+activate VCDATE
+UI -> VCDATE : getListOfSlots()
+activate VCSLOT
+VCDATE -> VCSLOT : ArrayList<VaccinationCenterSlot>
+deactivate VCDATE
+VCSLOT -> UI : return ArrayList<VaccinationCenterSlot>
+deactivate VCSLOT
+UI -> SNSUser : prints available getListOfSlots
+SNSUser -> UI   : selects an available slot : choosenSlot
+deactivate UI
+
+UI -> SNSUser : requests for the user to select a vaccine types
+activate UI
+activate VACTPS
+UI -> VACTPS : getVaccineTypes
+VACTPS -> UI : return ArrayList<VaccineType>
+deactivate VACTPS
+UI -> SNSUser : prints the available vaccine types
+SNSUser -> UI : selects the vaccine type : vaccineType
+deactivate UI
+
+UI -> SNSUser : selects a vaccine from the selected vaccine type
+activate UI
+UI -> VACTP : checks for the selected ":\VaccineType"
+VACTP -> CP : getListOfVaccines()
+deactivate VACTP
+CP -> UI : assigns a vaccine from the given type : vaccine
+deactivate UI
+
+UI -> CTRL : createScheduledVaccine(SnsNumber,vaccinationCenter.getName(),date, choosenSlot,vaccineType.getVaccinetechnology(),vaccine.getName())
+CTRL -> SCV : new ScheduledVaccine(SnsNumber,vaccinationCenter.getName(),date, choosenSlot,vaccineType.getVaccinetechnology(),vaccine.getName())
+activate UI
+activate CTRL
+activate SCV
+SCV -> CTRL : scheduledVaccine
+deactivate SCV
+UI -> CTRL : saveScheduledVaccine(scheduledVaccine)
+CTRL -> CP : company.SaveSchedule(scheduledVaccine)
+activate CP
+CP -> STORE : return scheduledVaccineStore.addToList(scheduledVaccine)
+activate STORE
+deactivate CP
+deactivate STORE
+deactivate CTRL
+deactivate UI
+
+UI -> SNSUser : asks if he wishes to receive a text message
+activate UI
+SNSUser -> UI : if SNS user wishes to receive a message
+UI -> SNSUser : writer.println(scheduledVaccine);
+deactivate UI
+
+UI -> SNSUser : informs the vaccination schedulling sucess.
+
+deactivate SNSUser
+
+
+
+
+
+
+
+@enduml

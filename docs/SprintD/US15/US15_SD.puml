@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor CenterCordinator as CC
+activate CC
+
+participant "UsersCSVFileUI" as UI
+participant "ListAdministrationsController" as CONTR
+participant "App" as APP
+participant "Company" as COMP
+participant "company:Company" as COMPob
+
+activate CC
+activate UI
+UI -> CONTR : controler = new VaccineAdministrationController()
+deactivate UI
+activate CONTR
+CONTR -> APP :  company = App.getInstance().getCompany()
+activate APP
+APP -> COMP : getCompany()
+deactivate APP
+activate COMP
+COMP -> STORE : vaccineAdministrationStore = new VaccineAdministrationStore()
+deactivate COMP
+CONTR -> COMPob : vaccineAdministrationStore = getVaccineAdministrationStore()
+deactivate CONTR
+UI --> CC : requests dates
+CC -> UI : provides dates
+activate UI
+UI -> CONTR : getVaccineAdministrationList(String dataStart, String dataEnd)
+deactivate UI
+activate CONTR
+CONTR -> STOREob : getVaccineAdministrationList(String dataStart, String dataEnd)
+deactivate CONTR
+activate STOREob
+STOREob -> STOREob : checkDate(String dataStart, String dataEnd, String dateCompared)
+STOREob -> CONTR : return list with all
+deactivate STOREob
+activate CONTR
+CONTR -> UI : confirms operation success
+deactivate CONTR
+activate UI
+UI --> CC : shows vaccine administrarions list and asks if wants to export to CSV file
+deactivate UI
+CC -> UI : confirms export to CSV file
+activate UI
+UI -> CONTR : generateCSV(List<vaccineAdministration>)
+deactivate UI
+activate CONTR
+CONTR -> STOREob : generateCSV(List<vaccineAdministration>)
+deactivate CONTR
+@enduml

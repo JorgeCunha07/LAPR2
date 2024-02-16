@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Center Coordinator" as CC
+
+activate CC
+CC -> ":System": Asks to start analyze the performance of a vaccination center
+activate ":System"
+CC <- ":System": requests typed data(time Interval and the day to analyze)
+deactivate ":System"
+CC -> ":System": types requested data
+activate ":System"
+CC <- ":System": asks to confirm data
+deactivate ":System"
+CC -> ":System": confirms data
+activate ":System"
+CC <- ":System": shows the results of the analysis
+deactivate ":System"
+
+@enduml

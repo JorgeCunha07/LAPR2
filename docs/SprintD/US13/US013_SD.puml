@@ -1,0 +1,55 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as Admin
+
+participant ":NewVaccineUI" as UI
+participant ":AddNewVaccineController" as NVC
+participant ":AddnewVaccineTypeController" as NVTC
+participant ":AddNewVaccineAdministrationController" as NVAC
+participant ":VaccineType" as VACT
+participant ":AdministrationProcess" as ADMP
+participant ":Vaccine" as VAC
+participant ":Company" as CPY
+
+activate Admin
+
+Admin -> UI : Wants to specify a new vaccine and its administration process
+activate UI
+
+
+UI --> Admin : requests data related to the vaccine (id, name)
+Admin -> UI : provides requested name and id data
+activate NVC
+UI -> NVC :  new vaccine()
+NVC -> VAC : vaccine(id, name)
+deactivate NVC
+
+UI ->Admin : requests the vaccine type (code, description and technology)
+Admin -> UI : provides vaccine type data (code, description, technology)
+activate NVTC
+UI -> NVTC : new vaccineType
+NVTC -> VACT : vaccineType(code, description, technology)
+deactivate NVTC
+
+
+UI -> Admin: requests data related to the new vaccine administration(minimum age, maximum age, number of doses, days between doses, dosage)
+Admin -> UI: provides vaccine administration data
+activate NVAC
+UI -> NVAC: new administrationProcess()
+NVAC -> ADMP : administrationProcess(minimum age, maximum age, number of doses, days between doses, dosage)
+deactivate NVAC
+
+
+activate NVC
+ADMP -> VAC : administrationProcess(minimum age, maximum age, number of doses, days between doses, dosage)
+VACT -> VAC : vaccineType(code, description, technology)
+VAC -> NVC  : vaccine(id, name, vaccineType, administrationProcess)
+NVC -> CPY : getListOfVaccines.add(new Vaccine(id, name, vaccineType, administrationProcess))
+deactivate NVC
+
+UI -> Admin: Informs the sucess of the vaccine operation sucess
+
+deactivate UI
+deactivate Admin
+@enduml

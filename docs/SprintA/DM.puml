@@ -1,0 +1,155 @@
+@startuml
+hide methods
+
+skinparam classAttributeIconSize 1
+
+object Company{
+ -designation
+}
+
+object HealthCareCenter{
+}
+
+object CommunityMassVaccinationCenter {
+}
+
+object AGES{
+}
+
+object ARS{
+}
+
+object Employee{
+-id
+}
+
+object CenterCoordinator{
+}
+
+object Administrator {
+}
+
+object Receptionist{
+}
+
+object Nurse{
+}
+
+object VaccinationCertificate{
+}
+
+object EntryRecord{
+}
+
+object RecoveryRoom{
+ -recoveryTime
+}
+
+object VaccineAdministration{
+ -codeNumber
+ -vaccineAdverseReactions
+}
+object VaccineSchedule{
+ -dateTime
+}
+
+
+object SNSUser {
+  -name
+  -SNSNumber
+  -email
+  -phoneNumber
+  -birthDate
+  -numberOfVaccines
+}
+
+object VaccinationCenter {
+  -name
+  -address
+  -phoneNumber
+  -email
+  -faxNumber
+  -websiteAddress
+  -openHour
+  -closeHour
+  -slotDuration
+  -fullCapacity
+  -maxVaccinePerSlot
+}
+object TypeOfVaccine{
+ -code
+ -designation
+}
+
+object Vaccine{
+ -nameBrand
+ -groupAge
+ -numberOfVaccines
+ -dosage
+ -timeBetweenDoses
+}
+
+
+
+
+CenterCoordinator  -->  Employee : is a >
+Administrator  -->  Employee : is a >
+Receptionist  -->  Employee : is a >
+Nurse  -->  Employee : is a >
+
+Administrator "1" --> "*" Employee : manages >
+Administrator "1" --> "*" TypeOfVaccine : manages >
+Administrator "1" --> "*" Vaccine : manages >
+Administrator "1" --> "*" VaccinationCenter : manages >
+Administrator "1" --> "*" SNSUser : creates >
+
+
+Company "1" --> "*" SNSUser : owns >
+Company "1" --> "*" Employee : owns >
+
+CenterCoordinator "1" --> "*" VaccinationCenter : manages >
+CenterCoordinator "1" --> "*" VaccinationCenter : works on >
+
+ARS "1" --> "*" HealthCareCenter : associated with >
+AGES "1" --> "*" HealthCareCenter : associated with >
+
+HealthCareCenter "1" --> "*" VaccinationCenter : is a  >
+HealthCareCenter "1" --> "*" TypeOfVaccine : administers >
+
+CommunityMassVaccinationCenter "1" --> "*" TypeOfVaccine : administers >
+CommunityMassVaccinationCenter "1" --> "*" VaccinationCenter : is a >
+
+TypeOfVaccine "1" --> "*" Vaccine : categorizes >
+
+VaccineSchedule "1" --> "*" TypeOfVaccine : takes >
+VaccineSchedule "1" --> "*" SNSUser : created for >
+
+RecoveryRoom "1" <-- "*" SNSUser : waits in >
+EntryRecord "1" <-- "*" SNSUser : gets registered on >
+
+Nurse "1" --> "*" Vaccine : waits in >
+Nurse "1" --> "*" VaccineAdministration: registers>
+Nurse "1" --> "*" EntryRecord : checks >
+Nurse "1" --> "*" SNSUser : knows the >
+Nurse "1" --> "*" VaccinationCertificate : request >
+Nurse "1" --> "*" VaccinationCertificate : issues >
+Nurse "1" --> "*" Vaccine : administers >
+Nurse "1" --> "*" VaccinationCenter : works on  >
+
+
+SNSUser "1" <-- "*" VaccineAdministration: administered on >
+SNSUser "1" <-- "*" VaccineSchedule : created >
+SNSUser "1" --> "*" VaccinationCertificate : requests   >
+
+VaccineAdministration "1" --> "*" VaccineSchedule : fulfils >
+
+VaccineAdministration "1" --> "*" EntryRecord : manages >
+VaccineAdministration "1" --> "*" VaccineSchedule : checks >
+
+Receptionist "1" --> "*" VaccinationCenter : works on >
+Receptionist "1" --> "*" VaccineSchedule : checks  >
+Receptionist "1" --> "*" EntryRecord : manages  >
+
+@enduml
+
+//Class or Object ?

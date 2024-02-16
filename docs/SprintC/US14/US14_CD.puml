@@ -1,0 +1,95 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package app <<Folder>> {
+package ui <<Folder>> {
+class LoadSNSUserUI {
+
+    }
+}
+
+package controller <<Folder>> {
+class LoadSNSUserController {
++ createSNSUserListFromCSV(location)
++ saveSNSUsersListFromCSVFile(snsUserAuxList)
+
+}
+}
+
+package domain <<Folder>> {
+package model <<Folder>> {
+class Company {
+- designation
++ checkLocation(location)
++ VerifyTypeOfCSV(file)
++ getSNSUserStore()
++ generatePassword()
++ addUserWithRole(snsUser,roleDTO,pass)
+}
+
+class SNSUser {
+- name
+- address
+- phoneNumber
+- email
+- citizenCardNumber
+- snsNumber
+- birthDate
+- gender
++ SNSUser(name,address,gender,phoneNumber,email,birthDate,snsUserNumber,citizenCardNumber)
++ checkSNSUsersFileAttributesPerLine(auxList, lineNumber)
++ getName()
++ getEmail()
+}
+
+package Store <<Folder>> {
+class SNSUserStore {
++ convertSNSUsersFileToArrayList(file,type)
++ checkSNSUser(snsUser)
++ addSNSUserListAux(snsUser)
++ addSNSUser(snsUser)
+     }
+    }
+   }
+  }
+ }
+
+class BufferedReader {
++ create(new FileReader(location))
+}
+
+
+package ExternalLibrary <<Folder>> {
+package pt.isep.lei.esoft.auth <<Folder>> {
+
+
+class AuthFacade {
++ existsRole(roleId)
++ addUserWithRole(name, email, password, roleId)
+}
+
+package mappers <<Folder>> {
+package dto <<Folder>> {
+class UserRoleDTO {
++ getId()
+    }
+   }
+  }
+ }
+
+
+LoadSNSUserUI ..> LoadSNSUserController
+
+LoadSNSUserController ..> Company
+LoadSNSUserController ..> BufferedReader
+LoadSNSUserController ..> SNSUserStore
+
+
+Company --> SNSUserStore
+Company ..> AuthFacade
+Company ..> SNSUser
+Company ..> UserRoleDTO
+
+SNSUserStore "1" --> "1..*" SNSUser: owns >
+
+@enduml

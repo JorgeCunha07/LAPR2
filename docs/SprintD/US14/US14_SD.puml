@@ -1,0 +1,140 @@
+@startuml
+autonumber
+
+actor "Administrator" as ADMIN
+
+participant ":LoadSNSUserUI" as UI
+participant ":LoadSNSUserController" as CONTROL
+participant "Company" as COMP
+participant "file: BufferedReader" as FILE
+participant ":AuthFacade" as AUTH
+participant "roleDto: UserRoleDTO" as DTO
+participant ": SNSUserStore" as SNSUserStore
+participant "snsUser : SNSUser" as SNSUser
+participant "snsUserAuxList : ArrayList<SNSUser>" as ListAux
+participant "snsUserList : ArrayList<SNSUser>" as List
+
+
+
+
+    activate ADMIN
+
+    ADMIN -> UI : asks to load a set of users from a CSV file
+
+    activate UI
+
+    ADMIN <-- UI : requests the path of the CSV file
+
+    deactivate UI
+
+    ADMIN-> UI : types the CSV file path
+
+    activate UI
+
+    UI -> CONTROL : createSNSUserFromCSV(location)
+
+
+    activate CONTROL
+
+
+    CONTROL -> COMP : checkLocation(location)
+
+    activate COMP
+    deactivate COMP
+
+
+    CONTROL --> FILE** : create(new FileReader(location))
+    CONTROL -> COMP : type = VerifyTypeofCSV(file)
+
+    activate COMP
+    deactivate COMP
+
+    CONTROL -> COMP : storeSNSUser = getSNSUserStore()
+
+    activate COMP
+    deactivate COMP
+
+    CONTROL -> SNSUserStore : snsUserAuxList=convertFileSNSUserToArrayList(file,type)
+
+    activate SNSUserStore
+
+    SNSUserStore --> ListAux ** : create()
+
+    loop while file has users
+     SNSUserStore --> SNSUser** : create()
+     SNSUserStore -> SNSUser  :checkSNSUsersFileAttributesPerLine(auxList, lineNumber)
+
+
+     activate SNSUser
+         deactivate SNSUser
+     SNSUserStore --> SNSUser  : snsUser = create(name,address,gender,phoneNumber,email,birthDate,snsUserNumber,citizenCardNumber)
+
+
+    activate SNSUser
+    deactivate SNSUser
+    SNSUserStore -> SNSUserStore : checkSNSUser(snsUser)
+
+
+    activate SNSUserStore
+    deactivate SNSUserStore
+
+    SNSUserStore -> SNSUserStore : addSNSUserListAUX(snsUser)
+
+    activate SNSUserStore
+    deactivate SNSUserStore
+    end
+
+    deactivate SNSUserStore
+    deactivate CONTROL
+    ADMIN <-- UI : shows the users that are present in the file and requests a confirmation
+
+    deactivate UI
+
+    ADMIN -> UI : confirms the users
+
+    activate UI
+
+    UI -> CONTROL : saveSNSUsersListFromCSVFile(snsUserAuxList)
+
+    activate CONTROL
+
+    loop while snsUserAuxList  has users
+
+    CONTROL -> SNSUserStore : checkSNSUser(snsUser)
+
+
+    activate SNSUserStore
+    deactivate SNSUserStore
+
+    CONTROL -> SNSUserStore : addSNSUser(snsUser)
+
+    activate SNSUserStore
+
+    deactivate SNSUserStore
+
+    deactivate SNSUserStore
+
+    CONTROL -> COMP :  pass = generatePassword()
+
+    activate COMP
+    deactivate COMP
+
+    CONTROL-> COMP : addUserWithRole(snsUser,roleDTO,pass)
+
+    ref over COMP
+    SD_CreateSNSUserOnAuthFacade.puml
+
+    end
+
+    activate COMP
+
+    end
+
+   deactivate COMP
+   deactivate CONTROL
+
+ADMIN <-- UI : informs operation success
+
+
+
+@enduml
